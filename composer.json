@@ -1,0 +1,17 @@
+{
+    "name": "jorgegc/phing-compass",
+    "description": "A collection of Behat targets for Phing.",
+    "type": "library",
+    "keywords": [
+        "phing",
+        "behat"
+    ],
+    "license": "GPL-2.0+",
+    "require": {
+        "drupal/drupal-extension": "1.0.9"
+    },
+    "minimum-stability": "dev",
+    "config": {
+        "bin-dir": "bin/"
+    }
+}

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="behat" default="behat:run">
+
+  <!-- ## Properties -->
+
+  <property name="behat.bin"        value="${project.basedir}/bin/behat" />
+  <property name="behat.cmd"        value="${behat.bin}" />
+  <property name="behat.tags"       value="" />
+  <property name="behat.report.dir" value="" />
+
+  <property name="app.uri"          value="" />
+  <property name="app.port"         value="" />
+  <property name="app.dir"          value="" />
+
+  <!-- ## Targets -->
+
+  <target name="behat:init"
+          description="Creates the Behat report folder."
+          unless="behat.initialized"
+          hidden="true">
+    <fail unless="behat.report.dir"
+          message="Please provide a behat.report.dir property." />
+    <fail unless="app.uri"
+          message="Please provide an app.uri property." />
+    <fail unless="app.port"
+          message="Please provide an app.port property." />
+    <fail unless="app.dir"
+          message="Please provide an app.dir property." />
+
+    <mkdir dir="${behat.report.dir}" />
+
+    <property name="behat.initialized" value="true" />
+  </target>
+
+  <target name="behat:run"
+          description="Runs Behat tests and prints human readable output. Intended for usage on the command line before committing."
+          depends="behat:init">
+    <if>
+      <equals arg1="${behat.tags}" arg2="" />
+      <then>
+        <exec command="${behat.bin} --ansi"
+              passthru="true"
+              logoutput="true"
+              checkreturn="true" />
+      </then>
+      <else>
+        <exec command="${behat.bin} --tags ${behat.tags} --ansi"
+              passthru="true"
+              logoutput="true"
+              checkreturn="true" />
+      </else>
+    </if>
+  </target>
+
+</project>
