@@ -1,5 +1,5 @@
 {
-    "name": "jorgegc/phing-compass",
+    "name": "jorgegc/phing-behat",
     "description": "A collection of Behat targets for Phing.",
     "type": "library",
     "keywords": [
