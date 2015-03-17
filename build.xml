@@ -5,9 +5,8 @@
   <!-- ## Properties -->
 
   <property name="behat.bin"        value="${project.basedir}/bin/behat" />
-  <property name="behat.cmd"        value="${behat.bin}" />
   <property name="behat.tags"       value="" />
-  <property name="behat.report.dir" value="" />
+  <property name="behat.report.dir" value="${project.basedir}/build/logs/behat" />
 
   <property name="app.uri"          value="" />
   <property name="app.port"         value="" />
@@ -16,7 +15,7 @@
   <!-- ## Targets -->
 
   <target name="behat:init"
-          description="Creates the Behat report folder."
+          description="Setup steps for Behat build tasks."
           unless="behat.initialized"
           hidden="true">
     <fail unless="behat.report.dir"
@@ -29,6 +28,14 @@
           message="Please provide an app.dir property." />
 
     <mkdir dir="${behat.report.dir}" />
+
+    <copy file="behat.example.yml"
+          tofile="behat.local.yml"
+          overwrite="true">
+      <filterchain>
+        <expandproperties />
+      </filterchain>
+    </copy>
 
     <property name="behat.initialized" value="true" />
   </target>
@@ -46,6 +53,26 @@
       </then>
       <else>
         <exec command="${behat.bin} --tags ${behat.tags} --ansi"
+              passthru="true"
+              logoutput="true"
+              checkreturn="true" />
+      </else>
+    </if>
+  </target>
+
+  <target name="behat:run-ci"
+          depends="behat:init"
+          description="Runs Behat tests and prints human readable output. Intended for usage on the continuous integration server.">
+    <if>
+      <equals arg1="${behat.tags}" arg2="" />
+      <then>
+        <exec command="${behat.bin} --format junit,html --out ${behat.report.dir}/,${behat.report.dir}/behat.html"
+              passthru="true"
+              logoutput="true"
+              checkreturn="true" />
+      </then>
+      <else>
+        <exec command="${behat.bin} --tags ${behat.tags} --format junit,html --out ${behat.report.dir}/,${behat.report.dir}/behat.html"
               passthru="true"
               logoutput="true"
               checkreturn="true" />
