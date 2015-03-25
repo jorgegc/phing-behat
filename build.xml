@@ -66,13 +66,13 @@
     <if>
       <equals arg1="${behat.tags}" arg2="" />
       <then>
-        <exec command="${behat.bin} --format junit,html --out ${behat.report.dir}/,${behat.report.dir}/behat.html"
+        <exec command="${behat.bin} --format junit --out ${behat.report.dir}"
               passthru="true"
               logoutput="true"
               checkreturn="true" />
       </then>
       <else>
-        <exec command="${behat.bin} --tags ${behat.tags} --format junit,html --out ${behat.report.dir}/,${behat.report.dir}/behat.html"
+        <exec command="${behat.bin} --tags ${behat.tags} --format junit --out ${behat.report.dir}"
               passthru="true"
               logoutput="true"
               checkreturn="true" />
