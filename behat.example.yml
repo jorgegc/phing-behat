@@ -2,8 +2,6 @@ default:
   extensions:
     Behat\MinkExtension\Extension:
       base_url: ${app.uri}
-      goutte: ~
-      selenium2: ~
     Drupal\DrupalExtension\Extension:
       drush:
         root: ${app.dir}
