@@ -2,10 +2,8 @@ default:
   extensions:
     Behat\MinkExtension\Extension:
       base_url: ${app.uri}
-      goutte:
-        guzzle_parameters:
-          curl.options:
-            CURLOPT_PORT: ${app.port}
+      goutte: ~
+      selenium2: ~
     Drupal\DrupalExtension\Extension:
       drush:
         root: ${app.dir}
