@@ -4,13 +4,11 @@
 
   <!-- ## Properties -->
 
-  <property name="behat.bin"        value="${project.basedir}/bin/behat" />
-  <property name="behat.tags"       value="" />
-  <property name="behat.report.dir" value="${project.basedir}/build/logs/behat" />
-
-  <property name="app.uri"          value="" />
-  <property name="app.port"         value="" />
-  <property name="app.dir"          value="" />
+  <property name="behat.bin"               value="${project.basedir}/bin/behat" />
+  <property name="behat.tags"              value="" />
+  <property name="behat.config.file"       value="${project.basedir}/behat.yml" />
+  <property name="behat.config.file.local" value="${project.basedir}/behat.example.yml" />
+  <property name="behat.report.dir"        value="${project.basedir}/build/logs/behat" />
 
   <!-- ## Targets -->
 
@@ -20,24 +18,30 @@
           hidden="true">
     <fail unless="behat.report.dir"
           message="Please provide a behat.report.dir property." />
-    <fail unless="app.uri"
-          message="Please provide an app.uri property." />
-    <fail unless="app.port"
-          message="Please provide an app.port property." />
-    <fail unless="app.dir"
-          message="Please provide an app.dir property." />
-
     <mkdir dir="${behat.report.dir}" />
+    <property name="behat.initialized" value="true" />
+  </target>
 
-    <copy file="behat.example.yml"
-          tofile="behat.local.yml"
+  <target name="behat:config"
+          description="Configures Behat for the project.">
+    <fail unless="behat.config.file"
+          message="Please provide a behat.config.file property." />
+    <fail unless="behat.config.file.local"
+          message="Please provide a behat.config.file.local property." />
+    <copy file="${behat.config.file}"
+          tofile="${project.basedir}/behat.yml"
           overwrite="true">
       <filterchain>
         <expandproperties />
       </filterchain>
     </copy>
-
-    <property name="behat.initialized" value="true" />
+    <copy file="${behat.config.file.local}"
+          tofile="${project.basedir}/behat.local.yml"
+          overwrite="true">
+      <filterchain>
+        <expandproperties />
+      </filterchain>
+    </copy>
   </target>
 
   <target name="behat:run"
@@ -61,8 +65,8 @@
   </target>
 
   <target name="behat:run-ci"
-          depends="behat:init"
-          description="Runs Behat tests and prints human readable output. Intended for usage on the continuous integration server.">
+          description="Runs Behat tests and prints human readable output. Intended for usage on the continuous integration server."
+          depends="behat:init">
     <if>
       <equals arg1="${behat.tags}" arg2="" />
       <then>

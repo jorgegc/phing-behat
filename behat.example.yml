@@ -4,14 +4,14 @@ default:
       base_url: ${app.uri}
     Drupal\DrupalExtension\Extension:
       drush:
-        root: ${app.dir}
+        root: ${app.root}
       drupal:
-        drupal_root: ${app.dir}
+        drupal_root: ${app.root}
 
 drupal7:
   extensions:
     Drupal\DrupalExtension\Extension:
       drupal:
-        drupal_root: ${app.dir}
+        drupal_root: ${app.root}
       drush:
-        root: ${app.dir}
+        root: ${app.root}
