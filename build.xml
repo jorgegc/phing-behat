@@ -16,18 +16,12 @@
           description="Setup steps for Behat build tasks."
           unless="behat.initialized"
           hidden="true">
-    <fail unless="behat.report.dir"
-          message="Please provide a behat.report.dir property." />
     <mkdir dir="${behat.report.dir}" />
     <property name="behat.initialized" value="true" />
   </target>
 
   <target name="behat:config"
           description="Configures Behat for the project.">
-    <fail unless="behat.config.file"
-          message="Please provide a behat.config.file property." />
-    <fail unless="behat.config.file.local"
-          message="Please provide a behat.config.file.local property." />
     <copy file="${behat.config.file}"
           tofile="${project.basedir}/behat.yml"
           overwrite="true">
