@@ -1,12 +1,16 @@
 {
     "name": "jorgegc/phing-behat",
     "description": "A collection of Behat targets for Phing.",
-    "type": "library",
     "keywords": [
         "phing",
         "behat"
     ],
+    "homepage": "https://github.com/jorgegc/phing-behat",
     "license": "GPL-2.0+",
+    "support": {
+        "issues": "https://github.com/jorgegc/phing-behat",
+        "source": "https://github.com/jorgegc/phing-behat"
+    },
     "require": {
         "drupal/drupal-extension": "v1.0.9"
     },
