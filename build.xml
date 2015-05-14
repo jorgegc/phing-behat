@@ -46,13 +46,11 @@
       <then>
         <exec command="${behat.bin} --ansi"
               passthru="true"
-              logoutput="true"
               checkreturn="true" />
       </then>
       <else>
         <exec command="${behat.bin} --tags ${behat.tags} --ansi"
               passthru="true"
-              logoutput="true"
               checkreturn="true" />
       </else>
     </if>
@@ -66,13 +64,11 @@
       <then>
         <exec command="${behat.bin} --format junit --out ${behat.report.dir}"
               passthru="true"
-              logoutput="true"
               checkreturn="true" />
       </then>
       <else>
         <exec command="${behat.bin} --tags ${behat.tags} --format junit --out ${behat.report.dir}"
               passthru="true"
-              logoutput="true"
               checkreturn="true" />
       </else>
     </if>
