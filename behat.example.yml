@@ -1,16 +1,8 @@
 default:
   extensions:
-    Behat\MinkExtension\Extension:
+    Behat\MinkExtension:
       base_url: ${app.uri}
-    Drupal\DrupalExtension\Extension:
-      drupal:
-        drupal_root: ${app.root}
-      drush:
-        root: ${app.root}
-
-drupal7:
-  extensions:
-    Drupal\DrupalExtension\Extension:
+    Drupal\DrupalExtension:
       drupal:
         drupal_root: ${app.root}
       drush:

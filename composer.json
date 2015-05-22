@@ -12,9 +12,8 @@
         "source": "https://github.com/jorgegc/phing-behat"
     },
     "require": {
-        "drupal/drupal-extension": "v1.0.9"
+        "drupal/drupal-extension": "~3.0"
     },
-    "minimum-stability": "dev",
     "config": {
         "bin-dir": "bin/"
     }
