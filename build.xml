@@ -44,12 +44,12 @@
     <if>
       <equals arg1="${behat.tags}" arg2="" />
       <then>
-        <exec command="${behat.bin} --ansi"
+        <exec command="${behat.bin} --colors"
               passthru="true"
               checkreturn="true" />
       </then>
       <else>
-        <exec command="${behat.bin} --tags ${behat.tags} --ansi"
+        <exec command="${behat.bin} --tags ${behat.tags} --colors"
               passthru="true"
               checkreturn="true" />
       </else>
